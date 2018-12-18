@@ -10,7 +10,7 @@ You should have a machine with at least 64GB of RAM, if not more.
 
 ### Prerequisites and installing
 
-Anaconda with python 3.6. It's recommended to create virtualenv for this project. Most of the packages are included in Anaconda, and remaining ones are easy to install with conda.
+Anaconda with python 3.7, due to tensorflow not being available for Python 3.7 yet. It's recommended to create virtualenv for this project. Most of the packages are included in Anaconda, and remaining ones are easy to install with conda.
 
 ```
 conda create -n lulc-ml-env python=3.6 anaconda
@@ -24,7 +24,7 @@ Using CSC taito-gpu to train the networks requires different approach. Perhaps t
 
 ### Training data generation
 
-Training and validation data are easy to generate. Just stack CORINE-mosaic and spectral index data (in that order), cast it as float32, extract sufficient number of smaller tiles from it, divide them to be training and validation sets, normalize values and save them as .npy -files. Notebook [Data preprocessing example](preprocessing.ipynb) shows an example of how to do this. 
+Training and validation data are easy to generate. Just stack CORINE-mosaic and spectral index data (in that order), cast it as float32, extract sufficient number of smaller tiles from it, divide them to be training and validation sets, normalize values and save them as .npy -files. Notebook [Data preprocessing example](preprocessing.ipynb) shows an example. 
 
 ### Training the networks
 
@@ -72,7 +72,8 @@ And results look like this:
 ### TODO
 
 - Acquire more data for training, either from CORINE mosaics or make GAN to generate it
--
+- Change loss function to something that takes class imbalance into account and make it work
+- 
 
 ## Authors
 
