@@ -1,6 +1,6 @@
 # Land cover classification with U-Net
 
-This repository contains latest version of the codebase related to my master's thesis titled "Land cover classification from multispectral data using convolutional autoencoder networks". Network used here is modified [U-Net](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/), trained from scratch. Note that U-Net is nowadays pretty much the de-facto standard for image segmentation, so nothing groundbreaking here.
+This repository contains latest version of the codebase related to my master's thesis titled ["Land cover classification from multispectral data using convolutional autoencoder networks"](https://jyx.jyu.fi/handle/123456789/60705). Network used here is modified [U-Net](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/), trained from scratch. Note that U-Net is nowadays pretty much the de-facto standard for image segmentation, so nothing groundbreaking here.
 
 This version uses Keras with TensorFlow backend. FastAi/PyTorch -version may arrive later.
 
