@@ -80,7 +80,7 @@ And results look like this:
 
 ![results](images/results.png)
 
-Input data is summer 2017 mosaic (9 channels, Sentinel-2 bands B02, B03, B04, B05, B06, B07, B08, B11, B12) stacked with summer 2017 spectral indices  (NDVI, NDTI, NDBI, NDMI, NDSI). 
+Input data is summer 2017 mosaic (9 channels, Sentinel-2 bands B02, B03, B04, B05, B06, B07, B08, B11, B12) stacked with summer 2017 spectral indices  (NDVI, NDTI, NDBI, NDMI, NDSI). Missing S2 reflectance values are patched with spring mosaic values.
 
 ### TODO
 
