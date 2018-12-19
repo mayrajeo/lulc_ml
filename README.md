@@ -10,7 +10,7 @@ You should have a machine with at least 64GB of RAM, if not more. Properly confi
 
 ### Prerequisites and installing
 
-Anaconda with python 3.7, due to tensorflow not being available for Python 3.7 yet. It's recommended to create virtualenv for this project. Most of the packages are included in Anaconda, and remaining ones are easy to install with conda.
+Anaconda with python 3.6, due to tensorflow not being available for Python 3.7 yet. It's recommended to create virtualenv for this project. Most of the packages are included in Anaconda, and remaining ones are easy to install with conda.
 
 ```
 conda create -n lulc-ml-env python=3.6 anaconda
