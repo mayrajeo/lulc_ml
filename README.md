@@ -61,7 +61,7 @@ Classifications can be performed with notebook [Land cover classification](lulc.
 
 Classwise F1-scores compared to CLC2018 labels for Kaakonkulma region vary between over 0.85 (Fields and water bodies) to 0.12 for grasslands. Micro average for F1-scores is 0.7 and macro is 0.58, so there is still much to improve. Keep in mind though, that CLC2018 labels are not 100% accurate, but rather only 70-80% accurate.
 
-Example classifications are from this area:
+Example classifications are from this area (image from ESA, processed by SYKE):
 
 ![kaakonkulma](images/area.png)
 
