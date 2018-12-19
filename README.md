@@ -1,6 +1,6 @@
-# Land cover classification with deep learning
+# Land cover classification with U-Net
 
-This repository contains latest version of the codebase related to my master's thesis titled "Land cover classification from multispectral data using convolutional autoencoder networks". Network used here is slightly modified [U-Net](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/), trained from scratch. Note that U-Net is nowadays pretty much the de-facto standard for image segmentation, so nothing groundbreaking here.
+This repository contains latest version of the codebase related to my master's thesis titled "Land cover classification from multispectral data using convolutional autoencoder networks". Network used here is modified [U-Net](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/), trained from scratch. Note that U-Net is nowadays pretty much the de-facto standard for image segmentation, so nothing groundbreaking here.
 
 This version uses Keras with TensorFlow backend. FastAi/PyTorch -version may arrive later.
 
@@ -26,9 +26,11 @@ Using CSC taito-gpu to train the networks requires different approach. Perhaps t
 
 Training and validation data are easy to generate. Just stack CORINE-mosaic and spectral index data (in that order), cast it as float32, extract sufficient number of smaller tiles from it, divide them to be training and validation sets, normalize values and save them as .npy -files. Notebook [Data preprocessing example](preprocessing.ipynb) shows an example of how to do this. 
 
+These networks are trained with just 8 image stacks sized 850x850px each, so these weights are suited only for Kaakonkulma region and nearby areas. Validation is done with two image stacks. 
+
 ### Training the networks
 
-Due to images having 14 channels, it's not straightforward to just use imagenet weights.
+Due to images having 14 channels, it's not straightforward to just use imagenet weights in the encoding path.
 
 Pretrained weights are provided here, but if you need to train the model, edit the file [train_model.py](train_model.py) according to your needs and run 
 
@@ -39,6 +41,13 @@ python train_model.py
 Input data is assumed to be .npy -files, but it's simple to modify the script class to work with .tiff, .img or .nc -files. Augmented data from these files is generated during training.
 
 Script saves each model and full training history into specified folder. 
+
+Three pretrained networks are provided:
+- 29-1.09.h5 is the network with lowest validation loss (unweighted categorical crossentropy)
+- 74-1.12.h5 has the highest validation accuracy
+- 98-1.20.h5 has both the lowest training loss and highest training accuracy. 
+
+Quick tests suggest that 98-1.20.h5 performs best for the whole dataset, but overall differences are very small.
 
 ### Classifications
 
@@ -59,7 +68,9 @@ Classifications can be performed with notebook [Land cover classification](lulc.
 13. Activation map for Water vegetation
 14. Activation map for Water bodies
 
-Classwise F1-scores compared to CLC2018 labels for Kaakonkulma region vary between over 0.85 (Fields and water bodies) to 0.12 for grasslands. Micro average for F1-scores is 0.7 and macro is 0.58, so there is still much to improve. Keep in mind though, that CLC2018 labels are not 100% accurate, but rather only 70-80% accurate.
+Classwise F1-scores compared to CLC2018 labels for Kaakonkulma region vary between more than 0.85 (Fields and water bodies) to 0.12 for grasslands. Micro average for F1-scores is 0.7 and macro is 0.58, so there is still much to improve. Keep in mind though, that CLC2018 labels are not 100% accurate, but rather only 70-80% accurate. This version has not been tested with CLC Level 1 labels, but based on results from master's thesis that level is expected to have overall accuracy of around 92%.
+
+Output has the same geotransform and projection than input file containing spectral indices.
 
 Example classifications are from this area (image from ESA, processed by SYKE):
 
@@ -69,9 +80,12 @@ And results look like this:
 
 ![results](images/results.png)
 
+Input data is summer 2017 mosaic (9 channels, Sentinel-2 bands B02, B03, B04, B05, B06, B07, B08, B11, B12) stacked with summer 2017 spectral indices  (NDVI, NDTI, NDBI, NDMI, NDSI). 
+
 ### TODO
 
 - Acquire more data for training, either from CORINE mosaics or make GAN to generate it
+  - More data is required especially for grasslands and other underrepresented classes
 - Change loss function to something that takes class imbalance into account and make it work
 - When generating the segmentation map the border regions for the sliding windows are not smoothed in any way. Some ideas from [this blog](http://blog.kaggle.com/2017/05/09/dstl-satellite-imagery-competition-3rd-place-winners-interview-vladimir-sergey/) might be useful.
 - Figure out some way to use pretrained weights in encoding path.
