@@ -1,12 +1,12 @@
 # Land cover classification with deep learning
 
-This repository contains latest version of the codebase related to my master's thesis titled "Land cover classification from multispectral data using convolutional autoencoder networks". Network used here is slightly modified [U-Net](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/), trained from scratch. Note that U-Net is nowadays pretty much the de-facto standard for image segmentation.
+This repository contains latest version of the codebase related to my master's thesis titled "Land cover classification from multispectral data using convolutional autoencoder networks". Network used here is slightly modified [U-Net](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/), trained from scratch. Note that U-Net is nowadays pretty much the de-facto standard for image segmentation, so nothing groundbreaking here.
 
-This version uses Keras with TensorFlow backend. FastAi/PyTorch -versions may arrive later.
+This version uses Keras with TensorFlow backend. FastAi/PyTorch -version may arrive later.
 
 ## Getting Started
 
-You should have a machine with at least 64GB of RAM, if not more.
+You should have a machine with at least 64GB of RAM, if not more. Properly configured GPU doesn't hurt either.
 
 ### Prerequisites and installing
 
@@ -24,7 +24,7 @@ Using CSC taito-gpu to train the networks requires different approach. Perhaps t
 
 ### Training data generation
 
-Training and validation data are easy to generate. Just stack CORINE-mosaic and spectral index data (in that order), cast it as float32, extract sufficient number of smaller tiles from it, divide them to be training and validation sets, normalize values and save them as .npy -files. Notebook [Data preprocessing example](preprocessing.ipynb) shows an example. 
+Training and validation data are easy to generate. Just stack CORINE-mosaic and spectral index data (in that order), cast it as float32, extract sufficient number of smaller tiles from it, divide them to be training and validation sets, normalize values and save them as .npy -files. Notebook [Data preprocessing example](preprocessing.ipynb) shows an example of how to do this. 
 
 ### Training the networks
 
@@ -59,7 +59,7 @@ Classifications can be performed with notebook [Land cover classification](lulc.
 13. Activation map for Water vegetation
 14. Activation map for Water bodies
 
-Classwise F1-scores compared to CLC2018 labels for Kaakonkulma region vary between over 0.85 (Fields and water bodies) to 0.12 for grasslands. Micro average for F1-scores is 0.7 and macro is 0.58, so there is still much to improve.
+Classwise F1-scores compared to CLC2018 labels for Kaakonkulma region vary between over 0.85 (Fields and water bodies) to 0.12 for grasslands. Micro average for F1-scores is 0.7 and macro is 0.58, so there is still much to improve. Keep in mind though, that CLC2018 labels are not 100% accurate, but rather only 70-80% accurate.
 
 Example classifications are from this area:
 
@@ -73,7 +73,8 @@ And results look like this:
 
 - Acquire more data for training, either from CORINE mosaics or make GAN to generate it
 - Change loss function to something that takes class imbalance into account and make it work
-- 
+- When generating the segmentation map the border regions for the sliding windows are not smoothed in any way. Some ideas from [this blog](http://blog.kaggle.com/2017/05/09/dstl-satellite-imagery-competition-3rd-place-winners-interview-vladimir-sergey/) might be useful.
+- Figure out some way to use pretrained weights in encoding path.
 
 ## Authors
 
