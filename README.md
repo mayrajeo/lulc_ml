@@ -22,7 +22,7 @@ conda install tensorflow keras xarray opencv netcdf4 rasterio holoviews gdal
 
 If you have properly configured GPU with enough memory, then replace tensorflow with tensorflow-gpu. If you plan to train new networks, then you must have one. 
 
-Using CSC taito-gpu to train the networks requires different approach. Perhaps the easiest way to is to use python-env/3.5.3-ml -module and install required packages with pip install --user \<package\>. Then just use batch jobs as instructed to train. Note that ml-python packages aren't installed on taito.
+Using CSC taito-gpu to train the networks requires different approach. Perhaps the easiest way to is to use python-env/3.5.3-ml -module and install required packages with pip install --user \<package\>. At least xarray, opencv, netcdf4, rasterio and gdal should be installed there. Then just use batch jobs as instructed to train. Note that ml-python packages aren't installed on taito.
 
 ### Training data generation
 
