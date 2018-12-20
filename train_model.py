@@ -1,8 +1,14 @@
 """
 This is the script for training the model.
 
-You should read keras documentation before 
+You should read keras documentation before using this script.
+
+Change the values of epochs and epoch_len according to your needs,
+training is done for 100 epochs, with training epoch len being 500 and 
+testing being 200
 """
+import matplotlib
+matplotlib.use('pdf')
 import numpy as np 
 import matplotlib.pyplot as plt
 import keras
@@ -25,10 +31,10 @@ def train_unet():
     rotation = 16 # How many different rotations to perform
     reflection = True # Are random flips included in augmentations
     # Next generate lists containing paths to training and validation images and masks
-    train_images = ['data/training_data/train_data_image_' + str(i) + '.npy' for i in range(8)]
-    train_masks = ['data/training_data/train_masks_' + str(i) + '.npy' for i in range(8)]
-    val_images = ['data/training_data/val_data_image_' + str(i) + '.npy' for i in range(2)]
-    val_masks = ['data/training_data/val_masks_' + str(i) + '.npy' for i in range(2)]
+    train_images = ['training_data/train_image_' + str(i) + '.npy' for i in range(9)]
+    train_masks = ['training_data/train_masks_' + str(i) + '.npy' for i in range(9)]
+    val_images = ['training_data/val_image_' + str(i) + '.npy' for i in range(2)]
+    val_masks = ['training_data/val_masks_' + str(i) + '.npy' for i in range(2)]
 
     # Set parameters for train and test datagenerators
     train_params = {'dim': [64,128,256,384],
@@ -100,6 +106,7 @@ def train_unet():
 
     # Plot and save the training metrics
     # Change savefig locations accordingly
+    # These may not work in taito-gpu but maybe.
     plt.figure()
     acc = model_train.history['acc']
     val_acc = model_train.history['val_acc']
