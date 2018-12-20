@@ -15,6 +15,8 @@ Anaconda with python 3.6, due to tensorflow not being available for Python 3.7 y
 ```
 conda create -n lulc-ml-env python=3.6 anaconda
 conda activate lulc-ml-env
+conda update conda
+conda update --all
 conda install tensorflow keras xarray opencv netcdf4 rasterio holoviews gdal
 ```
 
