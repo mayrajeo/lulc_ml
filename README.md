@@ -1,6 +1,6 @@
 # Land cover classification with U-Net
 
-This repository contains latest version of the codebase related to my master's thesis titled "Land cover classification from multispectral data using convolutional autoencoder networks". Network used here is modified [U-Net](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/), trained from scratch. Note that U-Net is nowadays pretty much the de-facto standard for image segmentation, so nothing groundbreaking here.
+This repository contains latest version of the codebase related to my master's thesis titled ["Land cover classification from multispectral data using convolutional autoencoder networks"](https://jyx.jyu.fi/handle/123456789/60705). Network used here is modified [U-Net](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/), trained from scratch. Note that U-Net is nowadays pretty much the de-facto standard for image segmentation, so nothing groundbreaking here.
 
 This version uses Keras with TensorFlow backend. FastAi/PyTorch -version may arrive later.
 
@@ -15,12 +15,14 @@ Anaconda with python 3.6, due to tensorflow not being available for Python 3.7 y
 ```
 conda create -n lulc-ml-env python=3.6 anaconda
 conda activate lulc-ml-env
+conda update conda
+conda update --all
 conda install tensorflow keras xarray opencv netcdf4 rasterio holoviews gdal
 ```
 
 If you have properly configured GPU with enough memory, then replace tensorflow with tensorflow-gpu. If you plan to train new networks, then you must have one. 
 
-Using CSC taito-gpu to train the networks requires different approach. Perhaps the easiest way to is to use python-env/3.5.3-ml -module and install required packages with pip install --user \<package\>. Then just use batch jobs as instructed to train. Note that ml-python packages aren't installed on taito.
+Using CSC taito-gpu to train the networks requires different approach. Perhaps the easiest way to is to use python-env/3.5.3-ml -module and install required packages with pip install --user \<package\>. At least xarray, opencv, netcdf4, rasterio and gdal should be installed there. Then just use batch jobs as instructed to train. Note that ml-python packages aren't installed on taito.
 
 ### Training data generation
 
@@ -80,7 +82,7 @@ And results look like this:
 
 ![results](images/results.png)
 
-Input data is summer 2017 mosaic (9 channels, Sentinel-2 bands B02, B03, B04, B05, B06, B07, B08, B11, B12) stacked with summer 2017 spectral indices  (NDVI, NDTI, NDBI, NDMI, NDSI). 
+Input data is summer 2017 mosaic (9 channels, Sentinel-2 bands B02, B03, B04, B05, B06, B07, B08, B11, B12) stacked with summer 2017 spectral indices  (NDVI, NDTI, NDBI, NDMI, NDSI). Missing S2 reflectance values are patched with spring mosaic values.
 
 ### TODO
 
